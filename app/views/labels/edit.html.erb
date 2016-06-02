@@ -1,0 +1,13 @@
+<h1> Edit Label</h1>
+
+
+<%= form_for(@label) do |f| %>
+  <div class="field">
+    <b><%= f.label :Name %></b>:<%= f.text_field :name %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<%= link_to 'Back', labels_path %>
+  <% end %>

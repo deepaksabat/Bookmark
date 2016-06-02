@@ -1,0 +1,31 @@
+
+
+<h1>BOOKMARK</h1>
+  <table align="center">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Label</th>
+      <th>Notes</th>
+      <th>Relesed</th>
+      <th colspan="20"></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @book_marks.each do |book_mark| %>
+      <tr>
+        <td><%=link_to book_mark.name, "http://#{book_mark.url}", target: "_blank" %></td>
+        <td><%= book_mark.url %></td>
+        <td><%= raw book_mark.labels.map(&:name).join(', ') %></td>
+        <td><%= book_mark.note %></td>
+        <td><%= book_mark.created_at.strftime("%B %d") %></td>
+        <td><%= link_to 'Show', book_mark %></td>
+        <td><%= link_to 'Edit', edit_book_mark_path(book_mark) %></td>
+        <td><%= button_to 'Destroy', book_mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

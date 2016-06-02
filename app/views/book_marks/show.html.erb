@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<h1> SHOW BOOKMARK</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @book_mark.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @book_mark.url %>
+</p>
+
+<p>
+  <strong>Label:</strong>
+  <%= @book_mark.labels.map(&:name).join(', ') %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @book_mark.note %>
+</p>
+
+<%= link_to 'Edit', edit_book_mark_path(@book_mark) %> |
+<%= link_to 'Back', book_marks_path %>

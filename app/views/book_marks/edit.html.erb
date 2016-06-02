@@ -1,0 +1,86 @@
+
+<html>
+<head>
+<style>
+header {
+    background-color:teal;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:400px;
+    width:150px;
+    float:left;
+    padding:5px;        
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px;    
+}
+footer {
+    background-color:teal;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;     
+}
+table#t01 th  {
+    background-color: black;
+    color: white;
+}
+</style>
+</head>
+    <header>
+        <h1><center>EDIT BOOKMARK</center></h1>
+        <center><%= form_tag(book_marks_path, :method => 'get') do %>
+             <%= text_field_tag :search, params[:search] %><br>
+                    <%= submit_tag "Search" %>
+               <% end %> 
+       
+          </center>
+
+          
+      </header>
+<nav>
+<%= link_to "Bookmark", root_path %></br>
+<%= link_to "Add Bookmark", new_book_mark_path %></br>
+Exporting bookmarks:
+  <%= link_to "CSV", book_marks_path(format: "csv") %> |
+  <%= link_to "Excel", book_marks_path(format: "xlsx") %><br>
+  <%= link_to "Manage label", labels_path %>
+
+</nav>
+<section>
+<%= form_for(@book_mark) do |f| %>
+  <div class="field">
+    <b><%= f.label :Name %></b>:<%= f.text_field :name %>
+  </div>
+  <br>
+
+
+  <div class="field">
+    <b><%= f.label :Location %></b>: <%= f.text_field :url %>
+  </div>
+  <br>
+  
+    <div class="area">
+   <b> <%= f.label :Notes %></b>:<%= f.text_area :note %>   
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <%= link_to 'Show', @book_mark %> |
+<%= link_to 'Back', book_marks_path %>
+  <% end %>
+</section>
+<footer>
+Copyright © Bookmark.com
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Book_marks") do |sheet|
+    sheet.add_row ["Name","Location","Labels","Notes","Relesed"]
+    @book_marks.each do |book_mark|
+        sheet.add_row [book_mark.name,book_mark.url,book_mark.labels.map(&:name).join(', '),book_mark.note,book_mark.created_at.strftime("%B %d")]
+    end
+end

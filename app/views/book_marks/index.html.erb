@@ -1,0 +1,104 @@
+<html>
+<head>
+<style>
+header {
+    background-color:teal;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:400px;
+    width:150px;
+    float:left;
+    padding:5px;        
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px;    
+}
+footer {
+    background-color:teal;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;     
+}
+table#t01 th  {
+    background-color: black;
+    color: white;
+}
+
+
+</style>
+</head>
+    <header>
+        <h1><center>BOOKMARK PAGE</center></h1>
+            <center><%= form_tag(book_marks_path, :method => 'get') do %>
+        <%= text_field_tag :search, params[:search] %>
+                    <%= submit_tag "Search" %>
+                    
+               <% end %>
+            </center>          
+      </header>    
+      <nav>
+      
+ 
+
+<%= link_to "Bookmark", root_path %></br>
+
+<div style="width:100px; height:200px; overflow: auto;" >
+<ul style="list-style-type:circle">
+<% @labels.each do |label| %>
+<li><%= link_to label.name,label %>
+(<%= label.book_mark_labels.count %>)</li>
+  <% end %>
+</div>
+</ul>
+
+</div>
+<%= link_to "Add Bookmark", new_book_mark_path %></br>
+Exporting bookmarks:
+  <%= link_to "CSV", book_marks_path(format: "csv") %> |
+  <%= link_to "Excel", book_marks_path(format: "xlsx") %><br>
+<%= link_to "Manage label", labels_path %>
+</nav>
+<section>
+
+<table id="t01", align="center">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Label</th>
+      <th>Notes</th>
+      <th>Relesed</th>
+      <th colspan="20"></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @book_marks.each do |book_mark| %>
+      <tr>
+        <td><%=link_to book_mark.name, "http://#{book_mark.url}", target: "_blank" %></td>
+        <td><%= book_mark.url %></td>
+        <td><%= raw book_mark.labels.map(&:name).join(', ') %></td>
+        <td><%= book_mark.note %></td>
+        <td><%= book_mark.created_at.strftime("%B %d") %></td>
+        <td><%= link_to 'Show', book_mark %></td>
+        <td><%= link_to 'Edit', edit_book_mark_path(book_mark) %></td>
+        <td><%= button_to 'Destroy', book_mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</section>
+<footer>
+Copyright © Bookmark.com
+</footer>
+</body>
+</html>

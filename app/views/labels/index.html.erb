@@ -1,0 +1,117 @@
+<html>
+<head>
+<style>
+header {
+    background-color:teal;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:400px;
+    width:150px;
+    float:left;
+    padding:5px;        
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px;    
+}
+footer {
+    background-color:teal;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;     
+}
+table#t01 th  {
+    background-color: black;
+    color: white;
+}
+</style>
+</head>
+    <header>
+        <h1><center>BOOKMARK PAGE</center></h1>
+            <center><%= form_tag(book_marks_path, :method => 'get') do %>
+             <%= text_field_tag :search, params[:search] %><br>
+                    <%= submit_tag "Search" %>
+               <% end %>
+            </center>          
+      </header>
+      <div align="right">
+          <%= link_to "SortByTitle", :sort => "name" %>|
+          <%#= link_to "SortByLabel", :sort => "label.name" %>|
+          <%#= link_to "SortByDate", :sort => "created_at" %>
+      </div>    
+      <nav>
+      
+ 
+
+<%= link_to "Bookmark", root_path %></br>
+
+<div style="width:100px; height:200px; overflow: auto;" >
+<ul style="list-style-type:circle">
+<% @labels.each do |label| %>
+<li><%= link_to label.name,label %>
+<%= label.book_mark_labels.count %></li>
+  <% end %>
+</div>
+</ul>
+
+</div>
+<%= link_to "Add Bookmark", new_book_mark_path %></br>
+Exporting bookmarks:
+  <%= link_to "CSV", book_marks_path(format: "csv") %> |
+  <%= link_to "Excel", book_marks_path(format: "xlsx") %><br>
+<%= link_to "Manage label", labels_path %>
+</nav>
+<section>
+
+<table  align="center">
+  <thead>
+    <tr>
+      <th><strong> Manage bookmark labels </strong></th>
+       <th colspan="20"></th>
+    </tr>
+  </thead>
+   <tbody>
+    <% @labels.each do |label| %>
+      <tr>
+        <td style="padding-right: 40px"><%= label.name %></td>
+        <td style="padding-right: 10px"><%= link_to 'Rename', edit_label_path(label) %></td>
+        <td style="padding-right: 10px"><%= button_to 'Remove', label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</section>
+<footer>
+Copyright © Bookmark.com
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
